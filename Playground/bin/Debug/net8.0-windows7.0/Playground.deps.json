@@ -1,0 +1,68 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Playground/1.0.0": {
+        "dependencies": {
+          "Microsoft.Office.Interop.PowerPoint": "15.0.4420.1018",
+          "OSP.Binars.Sql.Bin": "1.2.3.14",
+          "OSP.Binars.Sql.Calibration": "1.2.3.14",
+          "OSP.Binars.Sql.Merge": "1.2.3.14"
+        },
+        "runtime": {
+          "Playground.dll": {}
+        }
+      },
+      "Microsoft.Office.Interop.PowerPoint/15.0.4420.1018": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Office.Interop.PowerPoint.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.4420.1017"
+          }
+        }
+      },
+      "OSP.Binars.Sql.Bin/1.2.3.14": {},
+      "OSP.Binars.Sql.Calibration/1.2.3.14": {},
+      "OSP.Binars.Sql.Merge/1.2.3.14": {}
+    }
+  },
+  "libraries": {
+    "Playground/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Office.Interop.PowerPoint/15.0.4420.1018": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3XkJAqbYq93MqqSOPusNE+6Tve5yBkbE92n9W8f+k8Z9AzXeoTMqMYqhZMrzVOp4saHhMMbOD78JkCjvk+qIzw==",
+      "path": "microsoft.office.interop.powerpoint/15.0.4420.1018",
+      "hashPath": "microsoft.office.interop.powerpoint.15.0.4420.1018.nupkg.sha512"
+    },
+    "OSP.Binars.Sql.Bin/1.2.3.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pbZ8ORTM2aIlhYwGGesbALHj7gqWK3fhiDddKPs/NKHY8CcOdqO4sedUKw4XB9mNUw2bskxM3N7/Zd9lrR9+Lg==",
+      "path": "osp.binars.sql.bin/1.2.3.14",
+      "hashPath": "osp.binars.sql.bin.1.2.3.14.nupkg.sha512"
+    },
+    "OSP.Binars.Sql.Calibration/1.2.3.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gNZB5EwvwicysPKTzfD+FOq/UJlg4WHv8//TEPlkf5i8aExwseiOw10exVI3upmLe+9DWV1+NjllZVr+wqHICA==",
+      "path": "osp.binars.sql.calibration/1.2.3.14",
+      "hashPath": "osp.binars.sql.calibration.1.2.3.14.nupkg.sha512"
+    },
+    "OSP.Binars.Sql.Merge/1.2.3.14": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OSsSaHRH13ShSjFT11K9FFTZgmtVFDagze8zbpeqmfEKZwiiV5fXglj7xYox2bbJzqvJCQRyy31dXtbcomQnfQ==",
+      "path": "osp.binars.sql.merge/1.2.3.14",
+      "hashPath": "osp.binars.sql.merge.1.2.3.14.nupkg.sha512"
+    }
+  }
+}
