@@ -8,8 +8,16 @@
         mc:Ignorable="d"
         Title="ChartWindow" Height="450" Width="800">
     <Grid>
-        <Grid x:Name="GridChart">
-            
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid x:Name="GridChart" Grid.Column="1">
         </Grid>
+        <StackPanel Grid.Column="0" Margin="10">
+            <ComboBox>
+            </ComboBox>
+        </StackPanel>
     </Grid>
 </Window>

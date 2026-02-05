@@ -1,4 +1,6 @@
-﻿namespace Playground.Charting
+﻿using System.Runtime.CompilerServices;
+
+namespace Playground.Charting
 {
     public class ChartingViewModel(DatabaseBroker broker)
     {
@@ -12,6 +14,7 @@
             //- 
 
             ChartWindow newWindow = new(drawer, Broker, selectedVector);
+            newWindow.DataContext = this;
             newWindow.Show();
         }
     }

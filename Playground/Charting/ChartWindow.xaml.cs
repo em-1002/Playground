@@ -37,7 +37,10 @@ namespace Playground
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //1) Pull the data asychronously from the Broker based off the selected vector
+            List<DataModels.DataRecord> results = await Broker.GetDataRecordsAsync(SelectedVector.VectorId);
             //2) Draw the data using the IDraw drawer            
+            Drawer.Draw(results);
         }
+
     }
 }

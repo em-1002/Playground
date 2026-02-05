@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\fmaione\source\repos\Playground\Playground\obj\Debug\net10.0-windows\
+C:\Users\emontes\Code\Playground\Playground\obj\Debug\net10.0-windows\
 Playground
 none
 false
 TRACE;DEBUG;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NET10_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-C:\Users\fmaione\source\repos\Playground\Playground\App.xaml
+C:\Users\emontes\Code\Playground\Playground\App.xaml
 2-577448748
 
 23-700999353
-221-1062471165
+221-1464029772
 Charting\ChartWindow.xaml;MainWindow.xaml;
 
-False
+True
 
