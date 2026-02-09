@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls.Ribbon;
+using System.Windows.Input;
 using Arction.Wpf.Charting;
 using Playground.Charting;
 
@@ -42,5 +45,37 @@ namespace Playground
             Drawer.Draw(results);
         }
 
+        private async void SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            SelectedVector = (DataModels.Vector) VectorsComboBox.SelectedItem;
+            List<DataModels.DataRecord> results = await Broker.GetDataRecordsAsync(SelectedVector.VectorId);
+            Drawer.Draw(results);
+        }
+
+        private void OnKeyDownHandler(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Left)
+            {
+                if (VectorsComboBox.SelectedIndex == 0)
+                {
+                    VectorsComboBox.SelectedIndex = VectorsComboBox.Items.Count - 1;
+                }
+                else
+                {
+                    VectorsComboBox.SelectedIndex -= 1;
+                }
+            }
+            if (e.Key == Key.Right)
+            {
+                if (VectorsComboBox.SelectedIndex == VectorsComboBox.Items.Count-1)
+                {
+                    VectorsComboBox.SelectedIndex = 0;
+                }
+                else
+                {
+                    VectorsComboBox.SelectedIndex += 1;
+                }
+            }
+        }
     }
 }

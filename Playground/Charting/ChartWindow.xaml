@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Playground"
         Loaded="Window_Loaded"
         mc:Ignorable="d"
-        Title="ChartWindow" Height="450" Width="800">
+        Title="ChartWindow" Height="450" Width="800" KeyDown="OnKeyDownHandler">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
@@ -16,7 +16,15 @@
         <Grid x:Name="GridChart" Grid.Column="1">
         </Grid>
         <StackPanel Grid.Column="0" Margin="10">
-            <ComboBox>
+            <ComboBox x:Name="VectorsComboBox" ItemsSource="{Binding Vectors}" SelectionChanged="SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding Freq}"/>
+                            <Run Text="{Binding Pol}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
         </StackPanel>
     </Grid>

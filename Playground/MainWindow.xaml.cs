@@ -36,7 +36,7 @@ namespace Playground
             //create instance of the class we need based off the button.Tag we declared in the xaml
             var instance = Activator.CreateInstance(t);
             if (instance is DrawBase drawer)
-                mvm.Charting.Draw(drawer, selectedVector);
+                mvm.Charting.Draw(drawer, selectedVector, mvm.Data.Vectors);
         }
     }
 }
