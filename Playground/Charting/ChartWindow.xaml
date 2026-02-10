@@ -16,7 +16,9 @@
         <Grid x:Name="GridChart" Grid.Column="1">
         </Grid>
         <StackPanel Grid.Column="0" Margin="10">
-            <ComboBox x:Name="VectorsComboBox" ItemsSource="{Binding Vectors}" SelectionChanged="SelectionChanged">
+            <ComboBox x:Name="VectorsComboBox" Margin="0 0 0 10"
+                      ItemsSource="{Binding Vectors}" 
+                      SelectionChanged="SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
@@ -26,6 +28,13 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <ComboBox x:Name="ColorsComboBox" Margin="0 0 0 10"
+                      ItemsSource="{Binding LineColors}" 
+                      SelectedValuePath="Value" DisplayMemberPath="Key" 
+                      SelectedValue="{Binding LineColor}">
+            </ComboBox>
+            <CheckBox x:Name="DisplayPointsCheckBox" Content="Display Points" 
+                      IsChecked="{Binding PointsVisible}"/>
         </StackPanel>
     </Grid>
 </Window>

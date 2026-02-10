@@ -3,3 +3,6 @@
 /Playground/bin/Debug
 /Playground/obj
 /.vs
+/Playground/obj
+/Playground/obj/Debug/net10.0-windows
+/Playground/obj/Debug/net10.0-windows/Charting

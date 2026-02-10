@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using System.Windows.Media;
 
 namespace Playground.Charting
 {
@@ -14,11 +15,10 @@ namespace Playground.Charting
             //- Create a ChartWindow.  It will auto-create the chart and inject the chart to the drawer
             //- 
 
-            Vectors = vectors;
-            ChartWindow newWindow = new(drawer, Broker, selectedVector);
-            newWindow.DataContext = this;
+            ChartWindow newWindow = new(drawer, Broker, selectedVector, vectors);
             newWindow.VectorsComboBox.SelectedIndex = vectors.IndexOf(selectedVector);
             newWindow.Show();
         }
+
     }
 }
