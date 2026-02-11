@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Playground"
         Loaded="Window_Loaded"
         mc:Ignorable="d"
-        Title="ChartWindow" Height="450" Width="800" KeyDown="OnKeyDownHandler">
+        Title="ChartWindow" Height="800" Width="1300" KeyDown="OnKeyDownHandler">
+    <Window.Resources>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
@@ -16,7 +18,7 @@
         <Grid x:Name="GridChart" Grid.Column="1">
         </Grid>
         <StackPanel Grid.Column="0" Margin="10">
-            <ComboBox x:Name="VectorsComboBox" Margin="0 0 0 10"
+            <ComboBox x:Name="VectorsComboBox" Margin="0 0 0 10" 
                       ItemsSource="{Binding Vectors}" 
                       SelectionChanged="SelectionChanged">
                 <ComboBox.ItemTemplate>

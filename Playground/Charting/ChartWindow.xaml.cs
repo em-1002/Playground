@@ -22,26 +22,25 @@ namespace Playground
         private readonly IDraw Drawer;
         private DataModels.Vector SelectedVector;
         public List<DataModels.Vector> Vectors { get; set; }
+        public Color LineColor
+        {
+            get => _lineColor;
+            set { _lineColor = value; Drawer.SetLineColor(value); }
+        }
+        private Color _lineColor = Colors.CornflowerBlue;
         public bool PointsVisible
         {
             get => _pointsVisible;
             set { _pointsVisible = value; Drawer.SetPointsVisible(value); }
         }
         private bool _pointsVisible = false;
-        public Color LineColor
-        {
-            get => _lineColor;
-            set { _lineColor = value; Drawer.SetLineColor(value); }
-        }
-        private Color _lineColor = Colors.Yellow;
         public Dictionary<String, Color> LineColors { get; set; } = new Dictionary<string, Color> 
         { 
-            { "Red", Colors.Red },
-            { "Blue", Colors.Blue },
-            { "Yellow", Colors.Yellow },
+            { "Red", Colors.Maroon },
+            { "Blue", Colors.CornflowerBlue },
+            { "Yellow", Colors.Gold },
             { "Green", Colors.Green },
         };
-        public DataTable LineColorss { get; set; } = new DataTable();
 
         public ChartWindow(IDraw drawer, DatabaseBroker broker, DataModels.Vector selectedVector, List<DataModels.Vector> vectors)
         {
@@ -68,14 +67,6 @@ namespace Playground
 
             //Capture our initial vector
             SelectedVector = selectedVector;
-
-            LineColorss.Columns.Add("Name", typeof(String));
-            LineColorss.Columns.Add("Color", typeof(Color));
-            LineColorss.Rows.Add("Red", Colors.Red);
-            LineColorss.Rows.Add("Blue", Colors.Blue);
-            LineColorss.Rows.Add("Yellow", Colors.Yellow);
-            LineColorss.Rows.Add("Green", Colors.Green);
-            //LineColors.
 
         }
 

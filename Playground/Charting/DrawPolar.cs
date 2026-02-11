@@ -1,4 +1,6 @@
 ﻿using Arction.Wpf.Charting;
+using Arction.Wpf.Charting.Annotations;
+using Arction.Wpf.Charting.EventMarkers;
 using Arction.Wpf.Charting.SeriesPolar;
 using Arction.Wpf.Charting.SeriesXY;
 using Arction.Wpf.Charting.Titles;
@@ -19,18 +21,24 @@ namespace Playground.Charting
             //InjectedChart.ViewPolar.PointLineSeries
             if (InjectedChart is null)
                 return;
-            InjectedChart.ViewPolar.GraphBackground.Style = RectFillStyle.None;
-            InjectedChart.ViewPolar.Axes[0].Title.Shadow.Style = TextShadowStyle.Off;
-            InjectedChart.ViewPolar.Axes[0].Title.Color = Colors.Black;
-            InjectedChart.ViewPolar.Axes[0].Units.Color = Colors.Black;
-            InjectedChart.ViewPolar.Axes[0].MinorDivTickStyle.Color = Colors.Black;
-            InjectedChart.ViewPolar.Axes[0].MajorDivTickStyle.Color = Colors.Black;
-            InjectedChart.ViewPolar.Axes[0].Units.Color = Colors.Black;
-            //InjectedChart.ViewPolar.
-            //InjectedChart.ViewPolar.Axes[0]. = Colors.Black;
-            //InjectedChart.ViewPolar.XAxes[0].Title.Shadow.Style = TextShadowStyle.Off;
-            //InjectedChart.ViewPolar.XAxes[0].Title.Color = Colors.Black;
-            //InjectedChart.ViewPolar.XAxes[0].LabelsColor = Colors.Black;
+            if (!styleLoaded)
+            {
+                InjectedChart.ViewPolar.GraphBackground.Style = RectFillStyle.None;
+                InjectedChart.ViewPolar.Axes[0].Title.Shadow.Style = TextShadowStyle.Off;
+                InjectedChart.ViewPolar.Axes[0].Title.Color = Colors.Black;
+                InjectedChart.ViewPolar.Axes[0].Units.Color = Colors.Black;
+                InjectedChart.ViewPolar.Axes[0].MinorDivTickStyle.Color = Colors.Black;
+                InjectedChart.ViewPolar.Axes[0].MajorDivTickStyle.Color = Colors.Black;
+                InjectedChart.ViewPolar.Axes[0].AxisColor = Color.FromRgb(103, 140, 171);
+                InjectedChart.ViewPolar.Axes[0].ScaleNibs.Color = Color.FromRgb(95, 177, 245);
+                InjectedChart.ViewPolar.Axes[0].Title.Text = "'R' Values";
+                InjectedChart.ViewPolar.AutoSizeMargins = false;
+                InjectedChart.ViewPolar.Margins = new System.Windows.Thickness(50, 50, 50, 50);
+                InjectedChart.ViewPolar.Axes[0].MajorGrid.LabelsColor = Colors.DarkSlateGray;
+                InjectedChart.ViewPolar.Axes[0].MinorGrid.LabelsColor = Colors.DarkSlateGray;
+                InjectedChart.ViewPolar.Axes[0].GridAngular.LabelsColor = Colors.DarkSlateGray;
+                styleLoaded = true;
+            }
             List<PolarSeriesPoint> points = [];
             int points_idx = 0;
             double minR = double.MaxValue;
@@ -45,6 +53,7 @@ namespace Playground.Charting
             }
             InjectedChart.ViewPolar.PointLineSeries.Clear();
             InjectedChart.ViewPolar.Sectors.Clear();
+            InjectedChart.ViewPolar.Markers.Clear();
             if (points.Count > 0)
             {
                 int num_sectors = 10;
@@ -62,24 +71,38 @@ namespace Playground.Charting
                             sector_points.Select(p => p.Amplitude).Average(), 2
                         )
                     }";
-                    sector.Title.Visible = true;
+                    sector.Title.Visible = false;
                     sector.Title.Color = Colors.Black;
-                    sector.Fill.Color = Color.FromArgb(150, 192, 192, 192);
+                    sector.Fill.Color = Color.FromArgb(15, 0, 0, 0);
+                    sector.BorderlineStyle.Color = Color.FromArgb(30, 0, 0, 0);
+                    sector.BorderLocation = Sector.BorderStyle.Center;
                     sector.MinAmplitude = 0;
                     sector.MaxAmplitude = sector_points.Select(p => p.Amplitude)
                         .Max();
                     sector.AllowDragging = false;
                     sector.Behind = true;
-                    sector.Title.RadialOffsetPercentage = 50;
                     InjectedChart.ViewPolar.Sectors.Add(sector);
+                    PolarEventMarker meanMarker = new PolarEventMarker();
+                    meanMarker.AngleValue = (sector.BeginAngle + sector.EndAngle) / 2;
+                    meanMarker.Amplitude = sector_points.Select(p => p.Amplitude).Max() * 1.09;
+                    meanMarker.Label.Text = $"Mean: {Double.Round(
+                            sector_points.Select(p => p.Amplitude).Average(), 2
+                        )}";
+                    meanMarker.Label.Color = Colors.Black;
+                    meanMarker.Symbol.Width = 0;
+                    InjectedChart.ViewPolar.Markers.Add(meanMarker);
                 }
                 currentLineSeries.Clear();
-                PointLineSeriesPolar pointSeries = new();
-                currentLineSeries.Add(pointSeries);
-                pointSeries.AddPoints(points.ToArray(), false);
-                pointSeries.PointsVisible = pointsVisible;
-                pointSeries.LineStyle.Color = lineColor;
-                InjectedChart.ViewPolar.PointLineSeries.Add(pointSeries);
+                PointLineSeriesPolar data = new();
+                currentLineSeries.Add(data);
+                data.AddPoints(points.ToArray(), false);
+                data.PointsVisible = pointsVisible;
+                data.PointStyle.GradientFill = GradientFillPoint.Solid;
+                data.PointStyle.Width /= 1.5;
+                data.PointStyle.Height /= 1.5;
+                data.PointStyle.Color1 = lineColor - Color.FromArgb(0, 110, 110, 110);
+                data.LineStyle.Color = lineColor;
+                InjectedChart.ViewPolar.PointLineSeries.Add(data);
                 double rMargin = (maxR - minR) * 0.1;
                 rMargin = rMargin == 0 ? 1 : rMargin;
                 InjectedChart.ViewPolar.Axes[0].MinAmplitude = minR - rMargin;
@@ -100,6 +123,7 @@ namespace Playground.Charting
             foreach (PointLineSeriesPolar data in currentLineSeries)
             {
                 data.LineStyle.Color = newColor;
+                data.PointStyle.Color1 = newColor - Color.FromArgb(0, 110, 110, 110);
             }
         }
 

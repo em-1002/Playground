@@ -11,7 +11,7 @@ namespace Playground.Charting
     public class DrawXY : DrawBase
     {
         List<FreeformPointLineSeries> currentLineSeries = [];
-
+        
         public override void Draw(IEnumerable<DataRecord> records, bool pointsVisible, Color lineColor)
         {
             //Given the records, draw a FreeFormPointLineSeries on the XY chart
@@ -19,13 +19,26 @@ namespace Playground.Charting
 
             if (InjectedChart is null)
                 return;
-            InjectedChart.ViewXY.GraphBackground.Style = RectFillStyle.None;
-            InjectedChart.ViewXY.YAxes[0].Title.Shadow.Style = TextShadowStyle.Off;
-            InjectedChart.ViewXY.YAxes[0].Title.Color = Colors.Black;
-            InjectedChart.ViewXY.YAxes[0].LabelsColor = Colors.Black;
-            InjectedChart.ViewXY.XAxes[0].Title.Shadow.Style = TextShadowStyle.Off;
-            InjectedChart.ViewXY.XAxes[0].Title.Color = Colors.Black;
-            InjectedChart.ViewXY.XAxes[0].LabelsColor = Colors.Black;
+            if (!styleLoaded)
+            {
+                InjectedChart.ViewXY.GraphBackground.Style = RectFillStyle.None;
+                InjectedChart.ViewXY.YAxes[0].Title.Shadow.Style = TextShadowStyle.Off;
+                InjectedChart.ViewXY.YAxes[0].Title.Color = Colors.Black;
+                InjectedChart.ViewXY.YAxes[0].LabelsColor = Colors.DarkSlateGray;
+                InjectedChart.ViewXY.YAxes[0].AxisColor = Color.FromRgb(103, 140, 171);
+                InjectedChart.ViewXY.YAxes[0].ScaleNibs.Color = Color.FromRgb(95, 177, 245);
+                InjectedChart.ViewXY.YAxes[0].Title.Text = "'R' Values";
+                InjectedChart.ViewXY.XAxes[0].Title.Shadow.Style = TextShadowStyle.Off;
+                InjectedChart.ViewXY.XAxes[0].Title.Color = Colors.Black;
+                InjectedChart.ViewXY.XAxes[0].LabelsColor = Colors.DarkSlateGray;
+                InjectedChart.ViewXY.XAxes[0].AxisColor = Color.FromRgb(103, 140, 171);
+                InjectedChart.ViewXY.XAxes[0].ScaleNibs.Color = Color.FromRgb(95, 177, 245);
+                InjectedChart.ViewXY.XAxes[0].Title.Text = "Indices";
+                InjectedChart.ViewXY.Border.Color = Color.FromRgb(103, 140, 171);
+                InjectedChart.ViewXY.AxisLayout.AutoAdjustMargins = false;
+                InjectedChart.ViewXY.Margins = new System.Windows.Thickness(50, 50, 50, 80);
+                styleLoaded = true;
+            }
             List<SeriesPoint> points = [];
             int points_idx = 0;
             double maxX = double.MinValue;
@@ -57,7 +70,8 @@ namespace Playground.Charting
                     band.Title.Visible = true;
                     band.Title.Color = Colors.Black;
                     band.Fill.GradientFill = GradientFill.Solid;
-                    band.Fill.Color = Color.FromArgb(50, 0, 0, 0);
+                    band.Fill.Color = Color.FromArgb(15, 0, 0, 0);
+                    band.BorderColor = Color.FromArgb(30, 0, 0, 0);
                     band.Behind = true;
                     band.AllowMoveByUser = false;
                     band.AllowResizeByUser = false;
@@ -69,6 +83,10 @@ namespace Playground.Charting
                 data.AddPoints(points.ToArray(), false);
                 data.PointsVisible = pointsVisible;
                 data.LineStyle.Color = lineColor;
+                data.PointStyle.GradientFill = GradientFillPoint.Solid;
+                data.PointStyle.Width /= 1.5;
+                data.PointStyle.Height /= 1.5;
+                data.PointStyle.Color1 = lineColor - Color.FromArgb(0, 110, 110, 110);
                 InjectedChart.ViewXY.FreeformPointLineSeries.Add(data);
                 double xMargin = (maxX - minX) * 0.1;
                 double yMargin = (maxY - minY) * 0.1;
@@ -92,6 +110,7 @@ namespace Playground.Charting
             foreach (FreeformPointLineSeries data in currentLineSeries)
             {
                 data.LineStyle.Color = newColor;
+                data.PointStyle.Color1 = newColor - Color.FromArgb(0, 110, 110, 110);
             }
         }
 

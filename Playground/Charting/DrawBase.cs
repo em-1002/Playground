@@ -7,6 +7,7 @@ namespace Playground.Charting
     public abstract class DrawBase : IDraw
     {
         internal LightningChart? InjectedChart;
+        internal bool styleLoaded = false;
 
 
         public abstract void Draw(IEnumerable<DataRecord> records, bool pointsVisible, Color lineColor);
